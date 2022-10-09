@@ -1,5 +1,3 @@
-
-
 public class Vak
 {
     public int Id { get; set; }

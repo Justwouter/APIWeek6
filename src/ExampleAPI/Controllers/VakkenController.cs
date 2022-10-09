@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.CookiePolicy;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -24,6 +26,8 @@ namespace ExampleAPI.Controllers
         }
 
         // GET: api/Vakken
+        [Authorize]
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Vak>>> GetVak()
         {
@@ -35,7 +39,7 @@ namespace ExampleAPI.Controllers
         }
 
         // GET: api/Vakken/5
-        [Authorize]
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<Vak>> GetVak(int id)
         {
