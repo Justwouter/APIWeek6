@@ -63,7 +63,6 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-
 app.UseCookiePolicy();
 
 app.MapControllers();
