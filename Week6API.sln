@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DCC60EC9-742F-4EFA-8743-1291B79B7F98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "W6API", "src\W6API\W6API.csproj", "{8241BFD2-1B32-4BCE-B0AE-05015D470ACB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8241BFD2-1B32-4BCE-B0AE-05015D470ACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8241BFD2-1B32-4BCE-B0AE-05015D470ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8241BFD2-1B32-4BCE-B0AE-05015D470ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8241BFD2-1B32-4BCE-B0AE-05015D470ACB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8241BFD2-1B32-4BCE-B0AE-05015D470ACB} = {DCC60EC9-742F-4EFA-8743-1291B79B7F98}
+	EndGlobalSection
+EndGlobal
