@@ -5,9 +5,11 @@ using System.ComponentModel.DataAnnotations;
 public class GebruikerMetWachwoord : IdentityUser
 {
     public string? Password { get; init; }
-    public List<Like> LikedAttractions {get;set;}  = new List<Like>();
+    public string UserType {get;set;}
+    public List<Attractie> LikedAttractions {get;set;}  = new List<Attractie>();
 
 }
+
 
 public class GebruikerLogin
 {

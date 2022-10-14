@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace W6API.Migrations
 {
     [DbContext(typeof(PretparkContext))]
-    [Migration("20221012130519_Two")]
-    partial class Two
+    [Migration("20221014151449_One")]
+    partial class One
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,9 +28,30 @@ namespace W6API.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime>("bouwJaar")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("engheid")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("Attractie");
+                });
+
+            modelBuilder.Entity("AttractieGebruiker", b =>
+                {
+                    b.Property<int>("AttractieId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("GebruikerId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AttractieId", "GebruikerId");
+
+                    b.HasIndex("GebruikerId");
+
+                    b.ToTable("AttractieGebruiker");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -94,6 +115,10 @@ namespace W6API.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
@@ -144,6 +169,8 @@ namespace W6API.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -223,6 +250,37 @@ namespace W6API.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("GebruikerMetWachwoord", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasDiscriminator().HasValue("GebruikerMetWachwoord");
+                });
+
+            modelBuilder.Entity("AttractieGebruiker", b =>
+                {
+                    b.HasOne("Attractie", null)
+                        .WithMany()
+                        .HasForeignKey("AttractieId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_AttractieGebruiker_Attracties_AttractieId");
+
+                    b.HasOne("GebruikerMetWachwoord", null)
+                        .WithMany()
+                        .HasForeignKey("GebruikerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_AttractieGebruiker_Gebruikers_GebruikerId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -14,11 +14,14 @@ public class AccountController : ControllerBase
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
 
+    private readonly RoleManager<IdentityRole> _RoleManager;
 
-    public AccountController(UserManager<IdentityUser> userManager,SignInManager<IdentityUser> signInManager)
+
+    public AccountController(UserManager<IdentityUser> userManager,SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _RoleManager = roleManager;
 
     }
 
@@ -26,7 +29,7 @@ public class AccountController : ControllerBase
 
     [HttpPost]
     [Route("registreer")]
-    public async Task<ActionResult<IEnumerable<Attractie>>> Registreer([FromBody] GebruikerMetWachwoord gebruikerMetWachwoord)
+    public async Task<ActionResult<IEnumerable<GebruikerMetWachwoord>>> Registreer([FromBody] GebruikerMetWachwoord gebruikerMetWachwoord)
     {
         var resultaat = await _userManager.CreateAsync(gebruikerMetWachwoord, gebruikerMetWachwoord.Password);
         return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : StatusCode(201);

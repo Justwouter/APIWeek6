@@ -26,30 +26,30 @@ namespace W6API.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime>("bouwJaar")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("engheid")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("Attractie");
                 });
 
-            modelBuilder.Entity("Like", b =>
+            modelBuilder.Entity("AttractieGebruiker", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("AttractieId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("attractieId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("gebruikerId")
+                    b.Property<string>("GebruikerId")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("AttractieId", "GebruikerId");
 
-                    b.HasIndex("attractieId");
+                    b.HasIndex("GebruikerId");
 
-                    b.HasIndex("gebruikerId");
-
-                    b.ToTable("Like");
+                    b.ToTable("AttractieGebruiker");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -257,24 +257,28 @@ namespace W6API.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("UserType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasDiscriminator().HasValue("GebruikerMetWachwoord");
                 });
 
-            modelBuilder.Entity("Like", b =>
+            modelBuilder.Entity("AttractieGebruiker", b =>
                 {
-                    b.HasOne("Attractie", "attractie")
+                    b.HasOne("Attractie", null)
                         .WithMany()
-                        .HasForeignKey("attractieId")
+                        .HasForeignKey("AttractieId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_AttractieGebruiker_Attracties_AttractieId");
+
+                    b.HasOne("GebruikerMetWachwoord", null)
+                        .WithMany()
+                        .HasForeignKey("GebruikerId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GebruikerMetWachwoord", "gebruiker")
-                        .WithMany("LikedAttractions")
-                        .HasForeignKey("gebruikerId");
-
-                    b.Navigation("attractie");
-
-                    b.Navigation("gebruiker");
+                        .IsRequired()
+                        .HasConstraintName("FK_AttractieGebruiker_Gebruikers_GebruikerId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -326,11 +330,6 @@ namespace W6API.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("GebruikerMetWachwoord", b =>
-                {
-                    b.Navigation("LikedAttractions");
                 });
 #pragma warning restore 612, 618
         }

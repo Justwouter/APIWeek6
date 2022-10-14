@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "1fc4e76b-d830-4f3f-9010-e457a47e571c",
+		"name": "W6API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://localhost:7191/api/Account/registreer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"1\",\r\n  \"userName\": \"Wouter\",\r\n  \"normalizedUserName\": \"string\",\r\n  \"email\": \"string\",\r\n  \"normalizedEmail\": \"string\",\r\n  \"emailConfirmed\": true,\r\n  \"passwordHash\": \"string\",\r\n  \"securityStamp\": \"string\",\r\n  \"concurrencyStamp\": \"string\",\r\n  \"phoneNumber\": \"string\",\r\n  \"phoneNumberConfirmed\": true,\r\n  \"twoFactorEnabled\": true,\r\n  \"lockoutEnd\": \"2022-10-14T15:23:44.810Z\",\r\n  \"lockoutEnabled\": true,\r\n  \"accessFailedCount\": 0,\r\n  \"password\": \"Hello123*\",\r\n  \"userType\": \"string\",\r\n  \"likedAttractions\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7191/api/Account/registreer",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7191",
+					"path": [
+						"api",
+						"Account",
+						"registreer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7191/api/Account/login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiV291dGVyIiwiZXhwIjoxNjY1NzYxNjk4LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTkxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5MSJ9.5ANbW0HCv_ijuWswXikMnYq4lZgC2jPb44uVOY92uC8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"Wouter\",\r\n  \"password\": \"Hello123*\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7191/api/Account/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7191",
+					"path": [
+						"api",
+						"Account",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7191/api/Attractie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7191/api/Attractie",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7191",
+					"path": [
+						"api",
+						"Attractie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7191/api/Attractie/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiV291dGVyIiwiZXhwIjoxNjY1NTg2NzgyLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTkxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5MSJ9.fbQ6t9XPMPJLhoaLfbUdGBlozY8vGAoEKQ6KQIe0X2w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7191/api/Attractie/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7191",
+					"path": [
+						"api",
+						"Attractie",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7191/api/Like/2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiV291dGVyIiwiZXhwIjoxNjY1NzU3MjA4LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTkxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5MSJ9.T6GRBf4ugsJJXOiebDA_-2MZk8myPz-AbmjBOzoUncs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7191/api/Like/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7191",
+					"path": [
+						"api",
+						"Like",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7191/api/Like",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiV291dGVyIiwiZXhwIjoxNjY1NzU3MDc0LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTkxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5MSJ9.Fow_kPgCRnqkp5d20RBZyEzAUfjzxv0BrDs9RrkmpvQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7191/api/Like",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7191",
+					"path": [
+						"api",
+						"Like"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

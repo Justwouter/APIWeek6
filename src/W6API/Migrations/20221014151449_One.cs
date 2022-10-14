@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace W6API.Migrations
 {
-    public partial class Two : Migration
+    public partial class One : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,6 +28,9 @@ namespace W6API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Discriminator = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: true),
+                    UserType = table.Column<string>(type: "TEXT", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -46,6 +49,21 @@ namespace W6API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Attractie",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Naam = table.Column<string>(type: "TEXT", nullable: false),
+                    bouwJaar = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    engheid = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attractie", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -154,6 +172,29 @@ namespace W6API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "AttractieGebruiker",
+                columns: table => new
+                {
+                    AttractieId = table.Column<int>(type: "INTEGER", nullable: false),
+                    GebruikerId = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AttractieGebruiker", x => new { x.AttractieId, x.GebruikerId });
+                    table.ForeignKey(
+                        name: "FK_AttractieGebruiker_Attracties_AttractieId",
+                        column: x => x.AttractieId,
+                        principalTable: "Attractie",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_AttractieGebruiker_Gebruikers_GebruikerId",
+                        column: x => x.GebruikerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -190,6 +231,11 @@ namespace W6API.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AttractieGebruiker_GebruikerId",
+                table: "AttractieGebruiker",
+                column: "GebruikerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -210,7 +256,13 @@ namespace W6API.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "AttractieGebruiker");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Attractie");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
