@@ -21,18 +21,18 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
                 .WithMany(p => p.LikedAttractions)
 
                 .UsingEntity<Dictionary<string, object>>(
-                    "AttractieGebruiker",
+                    "Likes",
                     j => j
                         .HasOne<GebruikerMetWachwoord>()
                         .WithMany()
                         .HasForeignKey("GebruikerId")
-                        .HasConstraintName("FK_AttractieGebruiker_Gebruikers_GebruikerId")
+                        .HasConstraintName("FK_Likes_Gebruikers_GebruikerId")
                         .OnDelete(DeleteBehavior.Cascade),
                     j => j
                         .HasOne<Attractie>()
                         .WithMany()
                         .HasForeignKey("AttractieId")
-                        .HasConstraintName("FK_AttractieGebruiker_Attracties_AttractieId")
+                        .HasConstraintName("FK_Likes_Attracties_AttractieId")
                         .OnDelete(DeleteBehavior.ClientCascade));
         }
     }
