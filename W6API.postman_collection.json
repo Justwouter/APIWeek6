@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "1fc4e76b-d830-4f3f-9010-e457a47e571c",
+		"_postman_id": "e009429f-edbb-458f-9a04-740ba6ee350e",
 		"name": "W6API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "https://localhost:7191/api/Account/registreer",
+			"name": "Register",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -36,7 +36,7 @@
 			"response": []
 		},
 		{
-			"name": "https://localhost:7191/api/Account/login",
+			"name": "Login",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -76,7 +76,47 @@
 			"response": []
 		},
 		{
-			"name": "https://localhost:7191/api/Attractie",
+			"name": "Login Admin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiV291dGVyIiwiZXhwIjoxNjY1NzYxNjk4LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTkxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5MSJ9.5ANbW0HCv_ijuWswXikMnYq4lZgC2jPb44uVOY92uC8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"Wouter\",\r\n  \"password\": \"Hello123*\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7191/api/Account/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7191",
+					"path": [
+						"api",
+						"Account",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Attraction(s)",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -96,7 +136,7 @@
 			"response": []
 		},
 		{
-			"name": "https://localhost:7191/api/Attractie/1",
+			"name": "List Attraction",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -127,7 +167,7 @@
 			"response": []
 		},
 		{
-			"name": "https://localhost:7191/api/Like/2",
+			"name": "Like Attraction",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -158,7 +198,7 @@
 			"response": []
 		},
 		{
-			"name": "https://localhost:7191/api/Like",
+			"name": "List Likes",
 			"request": {
 				"auth": {
 					"type": "bearer",
