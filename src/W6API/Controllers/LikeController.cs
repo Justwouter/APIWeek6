@@ -34,7 +34,7 @@ public class LikeController : ControllerBase
 
 
     [HttpPost("{id}")]
-    public async Task<ActionResult<Attractie>> LikeAttractie(int id){
+    public async Task<ActionResult<List<GebruikerMetWachwoord>>> LikeAttractie(int id){
         if (_context.Attractie == null)
         {
             return NotFound();
@@ -59,7 +59,7 @@ public class LikeController : ControllerBase
             currentUser.LikedAttractions.Add(attractie);
         }
         await _context.SaveChangesAsync();
-        return attractie;
+        return attractie.UserLikes;
 
     }
 

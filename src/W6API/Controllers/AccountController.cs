@@ -22,7 +22,17 @@ public class AccountController : ControllerBase
         _userManager = userManager;
         _signInManager = signInManager;
         _RoleManager = roleManager;
+        _RoleManager.CreateAsync(new IdentityRole("Admin"));
+        _RoleManager.CreateAsync(new IdentityRole("Gebruiker"));
+        seedAdminUser();
+        
 
+    }
+
+    private async void seedAdminUser(){
+        var gebruiker = new GebruikerMetWachwoord{UserName = "Admin", Password = "Hello123*"};
+        await _userManager.CreateAsync(gebruiker);
+        await _userManager.AddToRoleAsync(gebruiker, "Admin");
     }
 
 
@@ -32,6 +42,7 @@ public class AccountController : ControllerBase
     public async Task<ActionResult<IEnumerable<GebruikerMetWachwoord>>> Registreer([FromBody] GebruikerMetWachwoord gebruikerMetWachwoord)
     {
         var resultaat = await _userManager.CreateAsync(gebruikerMetWachwoord, gebruikerMetWachwoord.Password);
+        await _userManager.AddToRoleAsync(gebruikerMetWachwoord, "Gebruiker");
         return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : StatusCode(201);
     }
 

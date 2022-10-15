@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder); 
+            //builder.Entity<GebruikerMetWachwoord>().HasData();
             builder.Entity<Attractie>()
                 .HasMany(p => p.UserLikes)
                 .WithMany(p => p.LikedAttractions)

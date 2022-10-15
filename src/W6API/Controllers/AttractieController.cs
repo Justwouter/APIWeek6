@@ -42,7 +42,7 @@ namespace W6API.Controller
         }
 
         // GET: api/Attractie/5
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize("Admin")]
         public async Task<ActionResult<Attractie>> GetAttractie(int id)
         {
           if (_context.Attractie == null)
