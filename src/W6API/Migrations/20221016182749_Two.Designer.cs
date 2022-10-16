@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace W6API.Migrations
 {
     [DbContext(typeof(PretparkContext))]
-    partial class PretparkContextModelSnapshot : ModelSnapshot
+    [Migration("20221016182749_Two")]
+    partial class Two
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.10");
@@ -275,15 +277,15 @@ namespace W6API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "41b4892b-bcb8-45b3-915f-194fdd7e0091",
-                            ConcurrencyStamp = "102199fc-9307-4733-b0cf-62b5c776426a",
+                            Id = "e74a1a8f-aef4-44d0-9301-a0364a3b0112",
+                            ConcurrencyStamp = "6f247d63-2f75-4984-8d08-5b05505a0633",
                             Name = "Medewerker",
                             NormalizedName = "MEDEWERKER"
                         },
                         new
                         {
-                            Id = "0a5b6b3c-d9dd-42f2-ac56-5d0b7a85d04c",
-                            ConcurrencyStamp = "0bdfa055-d570-499f-8e33-03a4426f3ad8",
+                            Id = "9bb918ac-7124-469b-8d3e-ebcfabeedf39",
+                            ConcurrencyStamp = "99507419-de5a-43d0-80f5-55012aae09af",
                             Name = "Gast",
                             NormalizedName = "GAST"
                         });
@@ -364,7 +366,7 @@ namespace W6API.Migrations
                             b1.Property<string>("GebruikerMetWachwoordId")
                                 .HasColumnType("TEXT");
 
-                            b1.Property<string>("identifies")
+                            b1.Property<string>("Identifies")
                                 .IsRequired()
                                 .HasColumnType("TEXT");
 

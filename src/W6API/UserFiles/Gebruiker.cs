@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations;
 public class GebruikerMetWachwoord : IdentityUser
 {
     public string? Password { get; init; }
+
+    public Geslacht geslacht {get;set;} = new Geslacht();
     public List<Attractie> LikedAttractions = new List<Attractie>();
 
 }

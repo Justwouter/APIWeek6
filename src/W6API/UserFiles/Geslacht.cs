@@ -1,14 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 [Owned]
 public class Geslacht{
 
-    private string identifies = "Onbekend";
-
-    public string Identifies{
-        get{return identifies;}
-        set{if(value == "Man" || value == "Vrouw" || value == "Anders" || value == "Onbekend"){identifies = value;}}
-    }
-
+    [Required]
+    [RegularExpression("Man|Vrouw|Onbekend|Anders", ErrorMessage = "Please choose Man, Vrouw, Onbekend or Anders")] 
+    public string? identifies {get;set;}
 
 }
