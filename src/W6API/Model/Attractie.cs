@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 public class Attractie
 {
     public int Id { get; set; }
@@ -5,5 +7,7 @@ public class Attractie
     public DateTime bouwJaar {get;set;}
     public int engheid {get;set;}
 
+    [NotMapped]
+    public int like {get;set;}
     public List<GebruikerMetWachwoord> UserLikes {get;set;} 
 }

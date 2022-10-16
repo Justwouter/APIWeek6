@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+
+[Owned]
 public class Geslacht{
 
     private string identifies = "Onbekend";

@@ -61,6 +61,10 @@ namespace W6API.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
@@ -76,6 +80,8 @@ namespace W6API.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -257,11 +263,30 @@ namespace W6API.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserType")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.HasDiscriminator().HasValue("GebruikerMetWachwoord");
+                });
+
+            modelBuilder.Entity("Role", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
+
+                    b.HasDiscriminator().HasValue("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "70ef594f-b6cf-4697-b066-2fd74bd83c0c",
+                            ConcurrencyStamp = "dbc7077f-e2b3-4183-8e79-f157c9425ed1",
+                            Name = "Medewerker",
+                            NormalizedName = "MEDEWERKER"
+                        },
+                        new
+                        {
+                            Id = "f7d4e5a0-ec59-42bf-82a0-7068701ce06e",
+                            ConcurrencyStamp = "4622517b-6076-43a1-8dbf-a19952d299f0",
+                            Name = "Gast",
+                            NormalizedName = "GAST"
+                        });
                 });
 
             modelBuilder.Entity("Likes", b =>

@@ -6,13 +6,42 @@
 	},
 	"item": [
 		{
+			"name": "Create Gast role (Old)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Gast\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7191/api/Role",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7191",
+					"path": [
+						"api",
+						"Role"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Register",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"id\": \"1\",\r\n  \"userName\": \"Wouter\",\r\n  \"normalizedUserName\": \"string\",\r\n  \"email\": \"string\",\r\n  \"normalizedEmail\": \"string\",\r\n  \"emailConfirmed\": true,\r\n  \"passwordHash\": \"string\",\r\n  \"securityStamp\": \"string\",\r\n  \"concurrencyStamp\": \"string\",\r\n  \"phoneNumber\": \"string\",\r\n  \"phoneNumberConfirmed\": true,\r\n  \"twoFactorEnabled\": true,\r\n  \"lockoutEnd\": \"2022-10-14T15:23:44.810Z\",\r\n  \"lockoutEnabled\": true,\r\n  \"accessFailedCount\": 0,\r\n  \"password\": \"Hello123*\",\r\n  \"userType\": \"string\",\r\n  \"likedAttractions\": []\r\n}",
+					"raw": "{\r\n  \"userName\": \"TestUser\",\r\n  \"email\": \"W@hhs.nl\",\r\n  \"emailConfirmed\": true,\r\n  \"phoneNumberConfirmed\": true,\r\n  \"twoFactorEnabled\": true,\r\n  \"lockoutEnd\": \"2022-10-14T15:23:44.810Z\",\r\n  \"lockoutEnabled\": true,\r\n  \"password\": \"Hello123*\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -83,7 +112,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiV291dGVyIiwiZXhwIjoxNjY1NzYxNjk4LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTkxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5MSJ9.5ANbW0HCv_ijuWswXikMnYq4lZgC2jPb44uVOY92uC8",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVGVzdFVzZXIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJHYXN0IiwiZXhwIjoxNjY1ODQwODQxLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTkxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5MSJ9.H2fUg1w6WqD4JsZGlazj5mS2JQWUb093Mmv7wdDylpc",
 							"type": "string"
 						}
 					]
@@ -92,7 +121,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"userName\": \"Wouter\",\r\n  \"password\": \"Hello123*\"\r\n}",
+					"raw": "{\r\n  \"userName\": \"TestUser\",\r\n  \"password\": \"Hello123*\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -116,10 +145,19 @@
 			"response": []
 		},
 		{
-			"name": "List Attraction(s)",
+			"name": "Create Attraction",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 2,\r\n  \"naam\": \"Achtbaan\",\r\n  \"engheid\": 20,\r\n  \"userLikes\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "https://localhost:7191/api/Attractie",
 					"protocol": "https",
@@ -143,7 +181,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiV291dGVyIiwiZXhwIjoxNjY1NTg2NzgyLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTkxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5MSJ9.fbQ6t9XPMPJLhoaLfbUdGBlozY8vGAoEKQ6KQIe0X2w",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVGVzdFVzZXIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJHYXN0IiwiZXhwIjoxNjY1ODQwODQxLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTkxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5MSJ9.H2fUg1w6WqD4JsZGlazj5mS2JQWUb093Mmv7wdDylpc",
 							"type": "string"
 						}
 					]
@@ -167,22 +205,22 @@
 			"response": []
 		},
 		{
-			"name": "Like Attraction",
+			"name": "List Attraction Eng",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiV291dGVyIiwiZXhwIjoxNjY1NzU3MjA4LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTkxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5MSJ9.T6GRBf4ugsJJXOiebDA_-2MZk8myPz-AbmjBOzoUncs",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVGVzdFVzZXIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJHYXN0IiwiZXhwIjoxNjY1ODQwODQxLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTkxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5MSJ9.H2fUg1w6WqD4JsZGlazj5mS2JQWUb093Mmv7wdDylpc",
 							"type": "string"
 						}
 					]
 				},
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:7191/api/Like/2",
+					"raw": "https://localhost:7191/api/Attractie/1",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -190,8 +228,90 @@
 					"port": "7191",
 					"path": [
 						"api",
-						"Like",
-						"2"
+						"Attractie",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Attraction Likes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVGVzdFVzZXIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJHYXN0IiwiZXhwIjoxNjY1ODQwODQxLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTkxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5MSJ9.H2fUg1w6WqD4JsZGlazj5mS2JQWUb093Mmv7wdDylpc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7191/api/Attractie/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7191",
+					"path": [
+						"api",
+						"Attractie",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Attraction Jaar",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVGVzdFVzZXIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJHYXN0IiwiZXhwIjoxNjY1ODQwODQxLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTkxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5MSJ9.H2fUg1w6WqD4JsZGlazj5mS2JQWUb093Mmv7wdDylpc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7191/api/Attractie/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7191",
+					"path": [
+						"api",
+						"Attractie",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Attraction(s)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7191/api/Attractie",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7191",
+					"path": [
+						"api",
+						"Attractie"
 					]
 				}
 			},
@@ -222,6 +342,37 @@
 					"path": [
 						"api",
 						"Like"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Like Attraction",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVGVzdFVzZXIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJHYXN0IiwiZXhwIjoxNjY1ODQwODQxLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTkxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE5MSJ9.H2fUg1w6WqD4JsZGlazj5mS2JQWUb093Mmv7wdDylpc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7191/api/Like/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7191",
+					"path": [
+						"api",
+						"Like",
+						"1"
 					]
 				}
 			},

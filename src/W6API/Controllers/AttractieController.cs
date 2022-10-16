@@ -24,31 +24,33 @@ namespace W6API.Controller
     public class AttractieController : ControllerBase
     {
         private readonly PretparkContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public AttractieController(PretparkContext context)
+        public AttractieController(PretparkContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: api/Attractie
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Medewerker")]
         public async Task<ActionResult<IEnumerable<Attractie>>> GetAttractie()
         {
           if (_context.Attractie == null)
           {
-              return NotFound();
+            return NotFound();
           }
             return await _context.Attractie.ToListAsync();
         }
 
         // GET: api/Attractie/5
-        [HttpGet("{id}"), Authorize("Admin")]
+        [HttpGet("{id}"), Authorize(Roles = "Medewerker")]
         public async Task<ActionResult<Attractie>> GetAttractie(int id)
         {
-          if (_context.Attractie == null)
-          {
-              return NotFound();
-          }
+            if (_context.Attractie == null)
+            {
+                return NotFound();
+            }
             var attractie = await _context.Attractie.FindAsync(id);
 
             if (attractie == null)
@@ -61,7 +63,7 @@ namespace W6API.Controller
 
         // PUT: api/Attractie/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("{id}"),Authorize(Roles = "Medewerker")]
         public async Task<IActionResult> PutAttractie(int id, Attractie attractie)
         {
             if (id != attractie.Id)
@@ -92,7 +94,7 @@ namespace W6API.Controller
 
         // POST: api/Attractie
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost,Authorize(Roles = "Medewerker")]
         public async Task<ActionResult<Attractie>> PostAttractie(Attractie attractie)
         {
           if (_context.Attractie == null)
@@ -106,7 +108,7 @@ namespace W6API.Controller
         }
 
         // DELETE: api/Attractie/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"),Authorize(Roles = "Medewerker")]
         public async Task<IActionResult> DeleteAttractie(int id)
         {
             if (_context.Attractie == null)
@@ -124,12 +126,31 @@ namespace W6API.Controller
 
             return NoContent();
         }
-
         
+
+
+        [HttpGet("FilterEngheid"),Authorize(Roles = "Gast")]
+        public async Task<ActionResult<IEnumerable<Attractie>>> GetAttractieScareFilter()
+        {
+            return await _context.Attractie.OrderByDescending(x => x.engheid).ToListAsync();
+        }
+
+        [HttpGet("FilterLikes"),Authorize(Roles = "Gast")]
+        public async Task<ActionResult<IEnumerable<Attractie>>> GetAttractieLikeAmt()
+        {
+            return await _context.Attractie.OrderByDescending(x => x.UserLikes.Count()).ToListAsync();
+        }
+
+        [HttpGet("FilterBouwjaar"),Authorize(Roles = "Gast")]
+        public async Task<ActionResult<IEnumerable<Attractie>>> GetAttractieBuildYear()
+        {
+            return await _context.Attractie.OrderByDescending(x => x.bouwJaar).ToListAsync();
+        }
 
         private bool AttractieExists(int id)
         {
             return (_context.Attractie?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
     }
 }

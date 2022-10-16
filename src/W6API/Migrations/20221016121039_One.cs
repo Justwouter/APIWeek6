@@ -14,6 +14,7 @@ namespace W6API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Discriminator = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true)
@@ -30,7 +31,6 @@ namespace W6API.Migrations
                     Id = table.Column<string>(type: "TEXT", nullable: false),
                     Discriminator = table.Column<string>(type: "TEXT", nullable: false),
                     Password = table.Column<string>(type: "TEXT", nullable: true),
-                    UserType = table.Column<string>(type: "TEXT", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -173,7 +173,7 @@ namespace W6API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AttractieGebruiker",
+                name: "Likes",
                 columns: table => new
                 {
                     AttractieId = table.Column<int>(type: "INTEGER", nullable: false),
@@ -181,19 +181,29 @@ namespace W6API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AttractieGebruiker", x => new { x.AttractieId, x.GebruikerId });
+                    table.PrimaryKey("PK_Likes", x => new { x.AttractieId, x.GebruikerId });
                     table.ForeignKey(
-                        name: "FK_AttractieGebruiker_Attracties_AttractieId",
+                        name: "FK_Likes_Attracties_AttractieId",
                         column: x => x.AttractieId,
                         principalTable: "Attractie",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_AttractieGebruiker_Gebruikers_GebruikerId",
+                        name: "FK_Likes_Gebruikers_GebruikerId",
                         column: x => x.GebruikerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
+                values: new object[] { "70ef594f-b6cf-4697-b066-2fd74bd83c0c", "dbc7077f-e2b3-4183-8e79-f157c9425ed1", "Role", "Medewerker", "MEDEWERKER" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
+                values: new object[] { "f7d4e5a0-ec59-42bf-82a0-7068701ce06e", "4622517b-6076-43a1-8dbf-a19952d299f0", "Role", "Gast", "GAST" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -233,8 +243,8 @@ namespace W6API.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_AttractieGebruiker_GebruikerId",
-                table: "AttractieGebruiker",
+                name: "IX_Likes_GebruikerId",
+                table: "Likes",
                 column: "GebruikerId");
         }
 
@@ -256,7 +266,7 @@ namespace W6API.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AttractieGebruiker");
+                name: "Likes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

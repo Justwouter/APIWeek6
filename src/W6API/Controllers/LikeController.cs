@@ -26,14 +26,18 @@ namespace W6API.Controller;
 public class LikeController : ControllerBase
 {
     private readonly PretparkContext _context;
+    private readonly RoleManager<IdentityRole> _roleManager;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public LikeController(PretparkContext context)
+    public LikeController(PretparkContext context, RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
     {
         _context = context;
+        _roleManager = roleManager;
+        _userManager = userManager;
     }
 
 
-    [HttpPost("{id}")]
+    [HttpPost("{id}"), Authorize(Roles = "Gast")]
     public async Task<ActionResult<List<GebruikerMetWachwoord>>> LikeAttractie(int id){
         if (_context.Attractie == null)
         {
@@ -49,7 +53,7 @@ public class LikeController : ControllerBase
         {
             return NotFound();
         }
-        //Check if user has liked the attraction
+        //Check if user has liked the attraction. If so, remove the like
         if(currentUser.LikedAttractions.Where(a => a.Id == attractie.Id).Count() > 0){
             attractie.UserLikes.Remove(currentUser);
             currentUser.LikedAttractions.Remove(attractie);
@@ -63,12 +67,14 @@ public class LikeController : ControllerBase
 
     }
 
-    [HttpGet]
+    [HttpGet,Authorize(Roles = "Gast")]
     public async Task<ActionResult<IEnumerable<Attractie>>> GetLikedAttractions(){
         var currentUser = await _context.Gebruikers.Include("LikedAttractions").SingleOrDefaultAsync(g => g.UserName == getSignedUser());
 
         if(currentUser !=null){
-            return currentUser.LikedAttractions.ToList();
+            if(!await _userManager.IsInRoleAsync(currentUser, "Medewerker")){
+                return currentUser.LikedAttractions.ToList();
+            }
         }
         return NotFound();
     }

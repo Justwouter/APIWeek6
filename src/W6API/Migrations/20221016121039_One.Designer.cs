@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace W6API.Migrations
 {
     [DbContext(typeof(PretparkContext))]
-    [Migration("20221014151449_One")]
+    [Migration("20221016121039_One")]
     partial class One
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,7 +39,7 @@ namespace W6API.Migrations
                     b.ToTable("Attractie");
                 });
 
-            modelBuilder.Entity("AttractieGebruiker", b =>
+            modelBuilder.Entity("Likes", b =>
                 {
                     b.Property<int>("AttractieId")
                         .HasColumnType("INTEGER");
@@ -51,7 +51,7 @@ namespace W6API.Migrations
 
                     b.HasIndex("GebruikerId");
 
-                    b.ToTable("AttractieGebruiker");
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -61,6 +61,10 @@ namespace W6API.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -78,6 +82,8 @@ namespace W6API.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -259,28 +265,47 @@ namespace W6API.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserType")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.HasDiscriminator().HasValue("GebruikerMetWachwoord");
                 });
 
-            modelBuilder.Entity("AttractieGebruiker", b =>
+            modelBuilder.Entity("Role", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
+
+                    b.HasDiscriminator().HasValue("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "70ef594f-b6cf-4697-b066-2fd74bd83c0c",
+                            ConcurrencyStamp = "dbc7077f-e2b3-4183-8e79-f157c9425ed1",
+                            Name = "Medewerker",
+                            NormalizedName = "MEDEWERKER"
+                        },
+                        new
+                        {
+                            Id = "f7d4e5a0-ec59-42bf-82a0-7068701ce06e",
+                            ConcurrencyStamp = "4622517b-6076-43a1-8dbf-a19952d299f0",
+                            Name = "Gast",
+                            NormalizedName = "GAST"
+                        });
+                });
+
+            modelBuilder.Entity("Likes", b =>
                 {
                     b.HasOne("Attractie", null)
                         .WithMany()
                         .HasForeignKey("AttractieId")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired()
-                        .HasConstraintName("FK_AttractieGebruiker_Attracties_AttractieId");
+                        .HasConstraintName("FK_Likes_Attracties_AttractieId");
 
                     b.HasOne("GebruikerMetWachwoord", null)
                         .WithMany()
                         .HasForeignKey("GebruikerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_AttractieGebruiker_Gebruikers_GebruikerId");
+                        .HasConstraintName("FK_Likes_Gebruikers_GebruikerId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
